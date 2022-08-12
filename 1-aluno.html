@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style/bootstrap.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <title>Ficha de cadastro</title>
+</head>
+
+<body>
+    <div id="app" class="container card mt-4">
+        <div>
+            <div class="mt-4">
+                <h1><span class="badge badge-secondary">Ficha de cadastro</span></h1>
+            </div>
+            <h2 class="mb-5"></h2>
+
+            <form id="formAluno">
+
+                <input type="hidden" name="id" v-model="id">
+
+                <div class="form-row mb-3">
+                    <div class="col-12">
+                        <label>Nome completo</label>
+                        <input type="text" id="validationServer01" class="form-control" name="nome" v-model="nome">
+                    </div>
+                </div>
+
+                <div class="form-row mb-12">
+                    <div class="col-md-8 col-12">
+                        <label for="">E-mail</label>
+                        <input type="email" class="form-control" name="email" v-model="email">
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <label for="">Data de Nascimento</label>
+                        <input type="date" class="form-control" name="dt_nascimento" v-model="dt_nascimento">
+                    </div>
+                </div>
+
+                <div class="form-row mb-3">
+                    <div class="col-md-6 col-12">
+                        <label for="">Altura</label>
+                        <input type="number" class="form-control" name="altura" v-model="altura">
+                    </div>
+                    <div class="col-md-6 col-12">
+                        <label for="">Peso</label>
+                        <input type="number" class="form-control" name="peso" v-model="peso">
+                    </div>
+                </div>
+                <div class="form-row mb-3">
+                    <div class="col-md-6 col-12">
+                        <label for="">Matrícula</label>
+                        <input type="text" class="form-control" name="matricula" v-model="matricula">
+                    </div>
+                    <div class="col-md-6 col-12">
+                        <label for="">Atestado Médico</label>
+                        <select class="form-control my-0 mr-sm-2" id="inlineFormCustomSelectPref"
+                            name="atestado_medico" v-model="atestado_medico">
+                            <option selected disabled value=""></option>
+                            <option value="1">Sim</option>
+                            <option value="2">Não</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <button v-if="acao ==='Cadastrar'" type="button" class="btn btn-success"
+                        @click="adicionarUsuario()">Enviar</button>
+                    <button v-if="acao === 'Editar'" type="button" margin="10px" class="btn btn-primary"
+                    @click="atualizarUsuario()">Atualizar</button>
+                    <button v-if="acao === 'Editar'" type="button" class="btn btn-secondary" listaAluno
+                        @click="cancelarEdicao()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+        <h2 class="mb-5"></h2>
+
+        <table class="table" width="100%">
+            <div class="form-row mb-4">
+                    <input @keyup="carregarUsuariosNoGrid" v-model="nome_aluno" type="text" class="form-control col-10 col-md-6"
+                        placeholder="Pesquisar Aluno" aria-label="Recipient's username"
+                        aria-describedby="button-addon2">
+                    <span class="input-group-text" id="basic-addon1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                            class="bi bi-search" viewBox="0 0 16 16">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z">
+                            </path>
+                        </svg>
+                    </span>
+            </div>
+            <thead>
+                <tr bgColor="#eee">
+                    <th>MATRICULA</th>
+                    <th>NOME</th>
+                    <th>ALTURA</th>
+                    <th>PESO</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="justify-content-center">
+                <tr v-for="(listar, indice) in listarAluno">
+                    <td>{{listar.matricula}}</td>
+                    <td>{{listar.nome}}</td>
+                    <td>{{listar.altura}}</td>
+                    <td>{{listar.peso}}</td>
+                    <td>{{listar.status}}</td>
+                    <td>
+                        <div class="btn-group float-right" role="group">
+                            <button type="button" class="btn btn-sm btn-info"
+                                @click="editarUsuario(indice)">Editar</button>
+
+                            <button type="button" class="btn btn-sm btn-danger"
+                                @click="excluirUsuario(listar.id)">Excluir</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2 class="mb-5"></h2>
+
+    <script src="./script/aluno.js"></script>
+</body>
+
+</html>

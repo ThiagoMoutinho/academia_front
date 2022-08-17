@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style/bootstrap.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <title>Professor</title>
+</head>
+
+<body>
+    <div id="app" class="container card mt-4 ">
+        <div class="mt-4">
+            <h1><span class="badge badge-secondary">Ficha do Professor</span></h1>
+        </div>
+
+        <h2 class="mb-5"></h2>
+
+        <form id="formProfessor">
+            <input type="hidden" name="id" v-model="id">
+
+            <div class="form-row mb-3">
+                <div class="col-md-8 col-8">
+                    <label for="">Nome Completo</label>
+                    <input type="text" class="form-control" name="nome" v-model="nome">
+                </div>
+                <div class="col-md-4 col-4">
+                    <label for="">Cargo</label>
+                    <select class="form-control" id="inlineFormCustomSelectPref" name="cargo"
+                        v-model="cargo">
+                        <option selected disabled value=""></option>
+                        <option selected value="Professor de Educação Física">Professor(a) de Educação Física</option>
+                        <option value="Professor de dança">Professor(a) de dança</option>
+                        <option value="personal">personal</option>
+
+                    </select>
+                </div>
+            </div>
+            <div class="form-row mb-3">
+                <div class="col-md-8 col-8">
+                    <label for="">E-mail</label>
+                    <input type="email" class="form-control" name="email" v-model="email">
+                </div>
+                <div class="col-md-4 col-4">
+                    <label for="">Cref:</label>
+                    <input type="number" class="form-control" name="cref" v-model="cref">
+                </div>
+            </div>
+
+            <div>
+                <button type="button" class="btn btn-success" v-if="acao === 'Cadastrar'"
+                    @click="adicionarProfessor()">Adicionar</button>
+                <button type="button" class="btn btn-primary" v-if="acao === 'Editar'" @click="atualizarProfessor()"
+                    margin="10px">Atualizar</button>
+                <button type="button" class="btn btn-secondary" v-if="acao === 'Editar'"
+                    @click="cancelarEdicao()">Cancelar</button>
+            </div>
+        </form>
+
+        <h2 class="mb-5"></h2>
+
+        <table class="table" width="100%">
+            <div class="form-row mb-4">
+                <input @keyup="carregarUsuariosNoGrid" v-model="nome_professor" type="text" class="form-control col-10 col-md-6"
+                    placeholder="Pesquisar Professor" aria-label="Recipient's username"
+                    aria-describedby="button-addon2">
+                <span class="input-group-text" id="basic-addon1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                        class="bi bi-search" viewBox="0 0 16 16">
+                        <path
+                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z">
+                        </path>
+                    </svg>
+                </span>
+            </div>
+            <thead>
+                <tr bgColor="#eee">
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Cargo</th>
+                    <th>Cref</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="justify-content-center">
+                <tr v-for="(listar, indice) in listarProfessor">
+                    <td>{{listar.id}}</td>
+                    <td>{{listar.nome}}</td>
+                    <td>{{listar.cargo}}</td>
+                    <td>{{listar.cref}}</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <div class="btn-group float-right" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-sm btn-info"
+                                @click="editarProfessor(indice)">Editar</button>
+
+                            <button type="button" class="btn btn-sm btn-danger"
+                                @click="excluirProfessor(listar.id)">Excluir</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2 class="mb-5"></h2>
+
+
+    <script src="./script/professor.js"></script>
+</body>
+
+</html>

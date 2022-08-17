@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style/bootstrap.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <title>Grupo Muscular</title>
+</head>
+
+<body>
+    <div id="app" class="container card mt-4">
+        <div class="mt-4">
+            <h1><span class="badge badge-secondary">Grupo muscular</span></h1>
+
+            <h2 class="mb-5"></h2>
+
+            <form id="listaGm">
+                <input type="hidden" name="id" v-model="id">
+
+                <div class="form-row mb-3">
+                    <div class="col-md-5 col-8">
+                        <label for="">Grupo muscular:</label>
+                        <input type="text" class="form-control" name="nome" v-model="nome">
+                    </div>
+                </div>
+        </div>
+        <div>
+            <button type="button" class="btn btn-success" v-if="acao === 'Cadastrar'" @click="adicionarGrupo()">Enviar</button>
+
+
+            <button type="button" class="btn btn-primary" v-if="acao === 'Editar'" @click="atualizarGm()" margin="10px">Atualizar</button>
+
+            <button type="button" class="btn btn-secondary" v-if="acao === 'Editar'"
+            @click="cancelarEdicao()">Cancelar</button>
+        </div>
+        </form>
+
+        <h2 class="mb-5"></h2>
+
+        <table class="table" width="100%">
+            <thead>
+                <tr bgColor="#eee">
+                    <th>ID</th>
+                    <th>NOME</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(listar, indice) in listaGm">
+                    <td>{{listar.id}}</td>
+                    <td>{{listar.nome}}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+                    <td>
+                        <div class="btn-group float-right" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-sm btn-info"
+                                @click="editarGrupo(indice)">Editar</button>
+
+                            <button type="button" class="btn btn-sm btn-danger"
+                                @click="excluirGrupo(listar.id)">Excluir</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2 class="mb-5"></h2>
+
+    <script src="./script/gm.js"></script>
+</body>
+
+</html>

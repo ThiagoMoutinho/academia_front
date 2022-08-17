@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style/bootstrap.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <title>Pesquisa Ficha</title>
+</head>
+<body>
+    <div id="app" class="container card mt-4 ">
+        <div id="pesquisaListar">
+            <div class="mt-4">
+                <h1><span class="badge badge-secondary">Pesquisa Ficha</span></h1>
+            </div>
+    
+            <h2 class="mb-5"></h2>
+    
+            <div class="form-row mb-4">
+                <input @keyup="carregarUsuariosNoGrid" v-model="aluno" type="text" class="form-control col-10 col-md-6"
+                    placeholder="Pesquisar Aluno" aria-label="Recipient's username"
+                    aria-describedby="button-addon2">
+                <span class="input-group-text" id="basic-addon1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                        class="bi bi-search" viewBox="0 0 16 16">
+                        <path
+                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z">
+                        </path>
+                    </svg>
+                </span>
+        </div>
+        </div>
+
+        <table class="table" width="100%">
+            <thead>
+                <tr bgColor="#eee">
+                    <th>Nome</th>
+                    <th>Professor</th>
+                    <th>Data de Início</th>
+                    <th>Data do Término</th>
+                    <th>Objetivo</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody class="justify-content-center">
+                <tr v-for="(listar, indice) in gridLista">
+                    <td>{{listar.aluno}}</td>
+                    <td>{{listar.professor}}</td>
+                    <td>{{listar.inicio}}</td>
+                    <td>{{listar.termino}}</td>
+                    <td>{{listar.objetivo}}</td>
+                    <td>
+                        <div class="btn-group float-right" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-sm btn-info"
+                                @click="editarFicha(indice)">Editar</button>
+
+                            <button type="button" class="btn btn-sm btn-danger"
+                                @click="excluirUsuario(listar.id)">Excluir</button>
+                        </div>
+                    </td>
+                    <div>
+                        <button v-if="acao === 'Editar'" type="button" margin="10px" class="btn btn-primary"
+                            @click="atualizarFicha()">Atualizar</button>
+                        <button v-if="acao === 'Editar'" type="button" class="btn btn-secondary" listaAluno
+                            @click="cancelarEdicao()">Cancelar</button>
+                    </div>
+                </tr>
+                <h2 class="mb-4"></h2>
+            </tbody>
+        </table>
+    </div>
+    <h2 class="mb-5"></h2>
+
+    </div>
+
+
+    <script src="script/pesquisa.js"></script>
+</body>
+</html>

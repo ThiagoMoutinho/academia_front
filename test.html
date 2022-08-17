@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/bootstrap.css">
+    <script src=""></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <form class="row mt-3 needs-validation" novalidate>
+            <div class="col-6 mb-5 position relative">
+                <label for="nameId" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="nameId" required >
+                <div class="valid-tooltip">
+                    campo preenchido
+                </div>
+                <div class="invalid-tooltip">
+                    preencha o campo
+                </div>
+            </div>
+            <div class="col-6 mb-5 position relative">
+                <label for="nameId" class="form-label">Sobrenome</label>
+                <input type="text" class="form-control" id="nameId" required >
+                <div class="valid-tooltip">
+                    campo preenchido
+                </div>
+                <div class="invalid-tooltip">
+                    preencha o campo
+                </div>
+            </div>
+            <div class="col-6 mb-4 position relative">
+                <label for="name" class="form-label">data de nascimento</label>
+                <input type="date" class="form-control" id="nameId" required >
+                <div class="valid-tooltip">
+                    campo preenchido
+                </div>
+                <div class="invalid-tooltip">
+                    preencha o campo
+                </div>
+            <h2 class="mb-5"></h2>
+            <div class="col-12 mb-4 position relative">
+                <div class=" col-12 form-check">
+                    <input type="checkbox" class="form-check-input" id="terms" required>
+                    <label for="terms" class="form-check-label">Aceito incompleto</label>
+                    <div class="valid-tooltip">
+                        campo preenchido
+                    </div>
+                    <div class="invalid-tooltip">
+                        preencha o campo
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+    
+
+
+
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
+</body>
+
+</html>

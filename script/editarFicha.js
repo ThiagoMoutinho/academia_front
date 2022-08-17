@@ -98,8 +98,7 @@ const vm = new Vue({
             fetch(`${this.baseUrl}/exercicio/listar-exe`)
             .then(r => r.json())
             .then(r => {
-                this.listarExercicios = r;
-                
+                this.listarExercicios = r;                
             })
         },
 
@@ -160,7 +159,6 @@ const vm = new Vue({
             this.acao = "Cadastrar";
         },
         excluirExercicio(id) {
-            console.log(id);
             if(confirm("Deseja realmente excluir este registro?")) {
                 this.gridFicha.splice(id, 1);
     
@@ -172,6 +170,11 @@ const vm = new Vue({
             
                     
         },
+
+        adicionarFicha() {
+            
+        },
+
         excluirUsuario(id) {
             if(confirm("Deseja realmente excluir este registro?")) {
                 fetch(`${id}`, {

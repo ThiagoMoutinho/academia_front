@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style/bootstrap.css">
+    <link rel="stylesheet" href="style/autoComplete.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <title>Ficha de Exercícios</title>
+</head>
+
+<body>
+    <div id="app" class="container card mt-4">
+        <div class="mt-4">
+            <h1><span class="badge badge-secondary">Editar Ficha</span></h1>
+        </div>
+        <h2 class="mb-5"></h2>
+
+        <form id="formFicha" @submit="checkForm">
+            <input type="hidden" name="id" v-model="id">
+
+            <div class="form-row mb-3">
+                <div class="col-md-6 col-12">
+                    <label for="">Aluno</label>
+                    <select class="form-control my-0 mr-sm-2" name="fk_aluno" v-model="fk_aluno">
+                        <option class="form-control" v-for="(listar, nome) in listarAluno" :value="listar.id">
+                            {{listar.nome}}</option>
+                    </select>
+                </div>
+                <div class="col-md-6 col-12">
+                    <label for="">Professor</label>
+                    <select class="form-control my-0 mr-sm-2" name="fk_professor" v-model="fk_professor">
+                        <option class="form-control" v-for="(listar, nome) in listarProfessor" :value="listar.id">
+                            {{listar.nome}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row mb-3">
+                <div class="col-md-3 col-12">
+                    <label for="">Data de Início</label>
+                    <input type="date" class="form-control" name="inicio" v-model="inicio">
+                </div>
+                <div class="col-md-3 col-12">
+                    <label for="">Data do Término</label>
+                    <input type="date" class="form-control" name="termino" v-model="termino">
+                </div>
+                <div class="col-md-6 col-12">
+                    <label for="">Objetivo:</label>
+                    <input type="text" class="form-control" name="objetivo" v-model="objetivo">
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Observação</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="observacao"
+                    v-model="observacao"></textarea>
+            </div>
+            <div class="form-row mb-3">
+                <div class="col-md-6 col-12">
+                    <label for="">Exercicio</label>
+                    <select class="form-control my-0 mr-sm-2" id="inlineFormCustomSelectPref" v-model="exercicio">
+                        <option class="form-control" v-for="(listar, nome) in listarExercicios" :value="listar">
+                            {{listar.nome}}</option>
+                    </select>
+                </div>
+                <div class="col-md-2 col-12">
+                    <label for="">Serie:</label>
+                    <input type="number" class="form-control" id="serie" v-model="serie">
+                </div>
+                <div class="col-md-2 col-12">
+                    <label for="">Repetição:</label>
+                    <input type="number" class="form-control" id="repeticao" v-model="repeticao">
+                </div>
+                <div class="col-md-2 col-12">
+                    <label for="">Descanso:</label>
+                    <input type="number" class="form-control" id="descanso" v-model="descanso">
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <button type="button" class="btn btn-success" v-if="acao === 'Cadastrar'"
+                    @click="adicionarExercicio()">Adicionar</button>
+            </div>
+
+            <div class="card mt-4">
+                <table class="table" width="100%">
+                    <thead>
+                        <tr bgColor="#85C1E9">
+                            <th>Exercicios</th>
+                            <th>Serie</th>
+                            <th>Repetiçãpo</th>
+                            <th>Descanso</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(listar, indice) in gridFicha">
+
+                            <td>{{listar.exercicio.nome}}</td>
+                            <td>{{listar.serie}}</td>
+                            <td>{{listar.repeticao}}</td>
+                            <td>{{listar.descanso}}</td>
+                            <td width="10%"></td>
+                            <td width="5%">
+                                <button type="button" id="button" class="btn btn-sm btn-danger"
+                                    @click="excluirExercicio(indice)">Excluir</button>
+                            </td>
+                            <input type="hidden" :value="listar.exercicio.id" name="exercicios[]">
+                            <input type="hidden" :value="listar.serie" name="series[]">
+                            <input type="hidden" :value="listar.repeticao" name="repeticoes[]">
+                            <input type="hidden" :value="listar.descanso" name="descansos[]">
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <h2 class="mb-4"></h2>
+            <button type="button" class="btn btn-success" v-if="acao === 'Cadastrar'" @click="adicionarFicha()">Enviar</button>
+        </form>
+        <h2 class="mb-4"></h2>
+    </div>
+    <script src="./script/ficha.js"></script>
+</body>
+<h2 class="mb-4"></h2>
+</html>

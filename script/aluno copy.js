@@ -15,7 +15,6 @@ new Vue({
         acao: "Cadastrar",
         baseUrl: "http://10.73.1.221:8080/academia/public",
     },
-    
     created() {
         this.carregarUsuariosNoGrid();
     },
@@ -31,7 +30,7 @@ new Vue({
             })
             
         },
-
+        
         adicionarUsuario() {
             
             fetch(`${this.baseUrl}/aluno/cadastrar`, {
@@ -44,21 +43,6 @@ new Vue({
                 this.carregarUsuariosNoGrid();
                 this.cancelarEdicao();
             })
-            (function () {
-                'use strict'
-                var forms = document.querySelectorAll('.needs-validation')
-                Array.prototype.slice.call(forms)
-                    .forEach(function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                        }
-        
-                        form.classList.add('was-validated')
-                    }, false)
-                    })
-                })()
         },
         atualizarUsuario() {
             fetch(`${this.baseUrl}/aluno/alterar`, {
@@ -119,5 +103,4 @@ new Vue({
             }
         }
     }
-    
 })
